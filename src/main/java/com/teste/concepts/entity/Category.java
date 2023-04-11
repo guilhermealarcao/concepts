@@ -7,12 +7,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 @Entity
 @Getter
 @Setter
 @Table(name = "tb_categoria")
-@NoArgsConstructor
-@AllArgsConstructor
 public class Category {
 
     @Id
@@ -23,4 +25,11 @@ public class Category {
     @Column(name = "nme_category")
     private String nome;
 
+    @ManyToMany(mappedBy = "categories")
+    private Set<Product> products = new HashSet<>();
+
+    public Category(Long id, String nome) {
+        this.id = id;
+        this.nome = nome;
+    }
 }
