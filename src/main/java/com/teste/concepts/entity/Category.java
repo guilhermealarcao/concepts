@@ -1,12 +1,14 @@
 package com.teste.concepts.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -15,7 +17,9 @@ import java.util.Set;
 @Getter
 @Setter
 @Table(name = "tb_categoria")
-public class Category {
+@NoArgsConstructor
+public class Category implements Serializable {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,6 +29,7 @@ public class Category {
     @Column(name = "nme_category")
     private String nome;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "categories")
     private Set<Product> products = new HashSet<>();
 
