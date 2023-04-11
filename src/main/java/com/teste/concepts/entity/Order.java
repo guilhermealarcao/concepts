@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.apache.tomcat.util.http.fileupload.ThresholdingOutputStream;
 
 import java.time.Instant;
 
@@ -22,8 +23,12 @@ public class Order {
 
     private Instant instant;
 
+    @Enumerated(EnumType.STRING)
+    private OrderStatus orderStatus;
+
     @ManyToOne
     @JoinColumn(name = "cod_usuario")
     private User user;
+
 
 }

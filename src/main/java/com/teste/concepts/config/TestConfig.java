@@ -1,9 +1,6 @@
 package com.teste.concepts.config;
 
-import com.teste.concepts.entity.Category;
-import com.teste.concepts.entity.Order;
-import com.teste.concepts.entity.Product;
-import com.teste.concepts.entity.User;
+import com.teste.concepts.entity.*;
 import com.teste.concepts.resources.CategoryRespository;
 import com.teste.concepts.resources.OrderRepository;
 import com.teste.concepts.resources.ProductRepository;
@@ -14,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.util.Arrays;
 
 @Configuration
 public class TestConfig implements CommandLineRunner {
@@ -50,9 +48,11 @@ public class TestConfig implements CommandLineRunner {
         productRepository.save(product1);
 
 
-        Order order = new Order(null, Instant.now(), user);
+        var order = new Order(null, Instant.now(), OrderStatus.WAITING_PAYMENT, user);
+        var order2 = new Order(null, Instant.now(), OrderStatus.DELIVERED, user);
+        var order3 = new Order(null, Instant.now(), OrderStatus.PACKING, user);
 
-        orderRepository.save(order);
+        orderRepository.saveAll(Arrays.asList(order, order2, order3));
 
 
     }
