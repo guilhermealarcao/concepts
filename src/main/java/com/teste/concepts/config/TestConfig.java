@@ -1,9 +1,11 @@
 package com.teste.concepts.config;
 
 import com.teste.concepts.entity.Category;
+import com.teste.concepts.entity.Order;
 import com.teste.concepts.entity.Product;
 import com.teste.concepts.entity.User;
 import com.teste.concepts.resources.CategoryRespository;
+import com.teste.concepts.resources.OrderRepository;
 import com.teste.concepts.resources.ProductRepository;
 import com.teste.concepts.resources.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 
 import java.math.BigDecimal;
+import java.time.Instant;
 
 @Configuration
 public class TestConfig implements CommandLineRunner {
@@ -24,7 +27,10 @@ public class TestConfig implements CommandLineRunner {
     
     @Autowired
     private ProductRepository productRepository;
-    
+
+
+    @Autowired
+    private OrderRepository orderRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -42,6 +48,12 @@ public class TestConfig implements CommandLineRunner {
         Product product1 = new Product(null, "kibe", "kibe descrip", new BigDecimal("1002"), "tehusauhdhuahd", category1);
 
         productRepository.save(product1);
+
+
+        Order order = new Order(null, Instant.now(), user);
+
+        orderRepository.save(order);
+
 
     }
 }
