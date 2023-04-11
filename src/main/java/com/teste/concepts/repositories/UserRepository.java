@@ -1,4 +1,4 @@
-package com.teste.concepts.resources;
+package com.teste.concepts.repositories;
 
 import com.teste.concepts.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;

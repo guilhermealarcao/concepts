@@ -1,12 +1,14 @@
 package com.teste.concepts.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,16 +16,14 @@ import java.util.List;
 @Table(name = "tb_usuario")
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
-public class User {
+public class User implements Serializable {
+
+//    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
-
-    @Column(name = "name" , nullable = false)
     private String name;
 
     private String email;
@@ -33,7 +33,11 @@ public class User {
     private String password;
 
     @OneToMany(mappedBy = "user")
+    @JsonIgnore
     private List<Order> orders = new ArrayList<>();
+
+    public User() {
+    }
 
     public User(Long id, String name, String email, String phone, String password) {
         this.id = id;
