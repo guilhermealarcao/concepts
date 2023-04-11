@@ -1,32 +1,36 @@
 package com.teste.concepts.entity;
 
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+
 @Entity
-@Table(name = "tb_usuario")
-@Getter
-@Setter
+@Table(name = "tb_produto")
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+@Getter
+@Setter
+public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(name = "idt_produto", nullable = false)
     private Long id;
 
-    @Column(name = "name" , nullable = false)
     private String name;
 
-    private String email;
+    private String description;
 
-    private String phone;
+    private BigDecimal price;
 
-    private String password;
+    private String imgUrl;
+
+    @ManyToOne
+    @JoinColumn(name = "cod_categoria")
+    private Category categories;
 
 }
